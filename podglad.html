@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Podgląd artykułu</title>
+</head>
+<body>
+
+<div id="content-container">
+
+</div>
+
+<script>
+  async function loadTemplate() {
+    try {
+      const response = await fetch('./szablon.html');
+      if (!response.ok) {
+        throw new Error('Błąd podczas wczytywania szablonu: ' + response.statusText);
+      }
+      const content = await response.text();
+      document.getElementById('content-container').innerHTML = content;
+    } catch (error) {
+      console.error('Błąd ładowania pliku szablon.html:', error);
+      document.getElementById('content-container').innerHTML = '<p>Nie udało się wczytać artykułu.</p>';
+    }
+  }
+
+  window.onload = loadTemplate;
+</script>
+
+</body>
+</html>
